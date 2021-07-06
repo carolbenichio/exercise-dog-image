@@ -18,8 +18,11 @@ class Dog extends React.Component {
   }
 
   reload() {
+    localStorage.setItem('oldDog', this.state.doguinho);
     this.setState({ loading: true });
-    this.fetchDog();
+    if(!this.state.doguinho.includes('terrier')) {
+      this.fetchDog();
+    }
   }
 
   async fetchDog() {
@@ -28,7 +31,7 @@ class Dog extends React.Component {
     this.setState({
       doguinho: requestJSON.message,
       loading: false,
-    });
+    }, () => alert(this.state.doguinho.split('/')[4]));
   }
 
   render() {
