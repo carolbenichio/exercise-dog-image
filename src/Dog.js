@@ -7,18 +7,30 @@ class Dog extends React.Component {
     this.state = {
       doguinho: '',
       loading: true,
+      ultimoDog: {},
     };
 
     this.fetchDog = this.fetchDog.bind(this);
     this.reload = this.reload.bind(this);
+    this.saveName = this.saveName.bind(this);
+    this.getName = this.getName.bind(this);
   }
 
   componentDidMount() {
     this.fetchDog();
   }
 
+  getName({ target }) {
+    this.setState({
+      ultimoDog: [target.value, this.state.doguinho]
+    })
+  }
+
+  saveName() {
+    localStorage.setItem('dog', this.state.ultimoDog);
+  }
+
   reload() {
-    localStorage.setItem('oldDog', this.state.doguinho);
     this.setState({ loading: true });
     if(!this.state.doguinho.includes('terrier')) {
       this.fetchDog();
@@ -42,6 +54,8 @@ class Dog extends React.Component {
     return (
       <div>
         <img src={ doguinho } alt="doguinho" />
+        <input onChange={ this.getName } type="text" placeholder="Nome do doguinho"/>
+        <button onClick={ this.saveName } type="button">Salvar nome</button>
         <button onClick={ this.reload } type="button">Mais doguinho</button>
       </div>
     );
