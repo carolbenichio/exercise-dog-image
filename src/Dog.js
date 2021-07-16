@@ -22,8 +22,8 @@ class Dog extends React.Component {
 
   getName({ target }) {
     this.setState({
-      ultimoDog: [target.value, this.state.doguinho]
-    })
+      ultimoDog: [target.value, this.state.doguinho],
+    });
   }
 
   saveName() {
@@ -32,7 +32,7 @@ class Dog extends React.Component {
 
   reload() {
     this.setState({ loading: true });
-    if(!this.state.doguinho.includes('terrier')) {
+    if (!this.state.doguinho.includes('terrier')) {
       this.fetchDog();
     }
   }
@@ -54,7 +54,7 @@ class Dog extends React.Component {
     return (
       <div>
         <img src={ doguinho } alt="doguinho" />
-        <input onChange={ this.getName } type="text" placeholder="Nome do doguinho"/>
+        <input onChange={ this.getName } type="text" placeholder="Nome do doguinho" />
         <button onClick={ this.saveName } type="button">Salvar nome</button>
         <button onClick={ this.reload } type="button">Mais doguinho</button>
       </div>
